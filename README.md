@@ -1,18 +1,80 @@
-## Triangulo
+# 📐 TriangleGuard
 
-O programa em Java apresentado na classe `appTriangulo` cria e exibe informações sobre diferentes triângulos usando a classe `Triangulo`. 
+Uma aplicação em **Java** desenvolvida com foco em **Programação Orientada a Objetos (POO)**, **Clean Code** e **tratamento de exceções resiliente**. 
 
-Foram criados três triângulos (`t1`, `t2` e `t3`) com medidas de lados diferentes. Em seguida, o programa imprime as informações de cada triângulo, incluindo seus lados e tipo (baseado nas medidas fornecidas). Além disso, é calculado e exibido o perímetro de cada triângulo usando o método `perimetro()` da classe `Triangulo`.
+O programa lê as medidas de diferentes triângulos via terminal, valida o domínio geométrico (Desigualdade Triangular) e calcula os perímetros com tratamento contínuo de entradas inválidas.
 
-Essa estrutura demonstra a capacidade do programa de manipular informações geométricas básicas, como triângulos e seus perímetros, utilizando conceitos de programação orientada a objetos em Java.
+---
 
+## 🛠️ Tecnologias e Conceitos Aplicados
 
+- **Java 17+**
+- **Encapsulamento e Imutabilidade:** Atributos `private final` garantindo o estado do objeto.
+- **Guard Clauses & Fail-Fast:** Validação no construtor impedindo a existência de objetos em estado inválido.
+- **Tratamento de Exceções:** Uso de `IllegalArgumentException` para regras de negócio e `InputMismatchException` para validações do `Scanner`.
+- **Resiliência na CLI:** Loop de tentativa/erro (`while` com `try-catch`) que impede que o programa quebre por digitação incorreta.
 
-A classe `Triangulo` é responsável por representar triângulos e realizar operações relacionadas a eles. Ela possui dois construtores: um para criar um triângulo com medidas específicas para cada lado (`a`, `b`, `c`) e outro para criar um triângulo equilátero, onde todos os lados têm o mesmo tamanho.
+---
 
-O método `perimetro()` calcula e retorna o perímetro do triângulo, somando os valores dos três lados. O método `toString()` retorna uma representação em string dos lados do triângulo.
+## 📐 Regras de Domínio Aplicadas
 
-Além disso, a classe possui um método `setA(int n)` para modificar o valor do lado `a` do triângulo, desde que a nova medida seja válida para formar um triângulo (satisfazendo a desigualdade triangular).
+Um triângulo só é aceito e instanciado se atender rigorosamente às duas condições geométricas:
 
-No construtor e no método `setA(int n)`, há uma verificação para garantir que os valores dos lados formem um triângulo válido, evitando medidas inválidas que não obedecem à desigualdade triangular.
+1. **Lados Positivos:** Todos os lados ($a, b, c$) devem ser maiores que zero ($a > 0, b > 0, c > 0$).
+2. **Desigualdade Triangular:** A soma das medidas de dois lados deve ser estritamente maior que a medida do terceiro lado.
+   $$a < b + c \quad \land \quad b < a + c \quad \land \quad c < a + b$$
 
+---
+
+## 🚀 Como Executar o Projeto
+
+### Pré-requisitos
+- JDK 17 ou superior instalado.
+- Terminal / Prompt de Comando.
+
+### Passo a passo
+
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/CaioBreis/Triangulo.git
+   cd Triangulo
+   ```
+2. **Compile as classes**
+   ```bash
+   javac -d bin src/entities/Triangle.java src/Main.java
+   ```
+3. **Execute a aplicação:**
+   ```bash
+   java -cp bin Main
+   ```
+
+## 🖥️ Exemplo de Uso no Terminal
+
+```text
+  ---- Triangle Perimeter Calculator ----
+
+Enter 3 measures for triangle A: 1 1 10
+[DOMAIN ERROR] Invalid measurements (1.00, 1.00, 10.00). The sum of any two sides must be strictly greater than the third. Please try again.
+
+Enter 3 measures for triangle A: 3 4 5
+
+Enter 3 measures for triangle B: abc
+[INPUT ERROR] You must enter numeric values. Please try again.
+
+Enter 3 measures for triangle B: 5 5 5
+Enter 3 measures for triangle C: 6 8 10
+
+================ RESULTS ================
+Triangle A -> Sides: 3.00 | 4.00 | 5.00
+Perimeter: 12.00
+----------------------------------------
+Triangle B -> Sides: 5.00 | 5.00 | 5.00
+Perimeter: 15.00
+----------------------------------------
+Triangle C -> Sides: 6.00 | 8.00 | 10.00
+Perimeter: 24.00
+----------------------------------------
+```
+
+## 🤝 Contribuição
+Projeto refatorado em dupla para consolidação de boas práticas de POO e Clean Code em Java.
